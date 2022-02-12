@@ -1,0 +1,17 @@
+*.swp
+.publish
+static/css/*.css*
+node_modules/
+npm-debug.log
+rev-manifest.json
+coverage
+branch/
+www
+.sass-cache
+lib/
+old/
+CNAME
+static/image/logo*
+static/image/chart*
+*extension*
+!static/image/extension
