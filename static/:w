@@ -1,0 +1,523 @@
+body { overflow: hidden; }
+#tour { display: none !important; }
+
+#authorization-container {
+  display: grid;
+  grid-template-columns: auto min-content;
+  grid-template-rows: auto min-content;
+  grid-template-areas:
+    "authorization-headings authorization-actions"
+    "authorization-footer authorization-footer";
+  background-image: url(../image/chart.jpeg);
+  background-size: cover;
+  padding: 10px 30px;
+  position: fixed;
+  z-index: 99999;
+  height: 100%;
+  width: 100%;
+  top: 0;
+
+  #authorization-headings {
+    grid-area: authorization-headings;
+    align-self: center;
+
+    h1 {
+      position: absolute;
+      margin-top: -140px;
+      text-transform: uppercase;
+      font-size: 23px;
+      margin-left: 16px;
+      color: white;
+    }
+
+    img { width: 48%; }
+  }
+
+  #authorization-actions {
+    grid-area: authorization-actions;
+    align-self: center;
+    padding-right: 100px;
+    z-index: 9;
+  }
+
+  #authorization-footer {
+    grid-area: authorization-footer;
+    color: white;
+    font-size: 8px;
+  }
+
+  #user-login, #registration {
+    width: 320px;
+    background: white;
+    border: 1px solid gray;
+    padding: 25px;
+    text-align: center;
+
+    img {
+      margin-top: 8px;
+      width: 100%;
+    }
+
+    img, input { margin-bottom: 35px; }
+
+    input, button {
+      display: block;
+      padding: 10px;
+      width: 100%;
+      border-radius: 0;
+      border: 1px solid lightgray;
+    }
+
+    button {
+      padding: 11px 0;
+      background: #098f09;
+      border: 1px solid gray;
+      text-transform: inherit;
+
+      &:hover { background: green; }
+    }
+
+    button[type="button"] {
+      background: #f3f3f3;
+      color: black;
+
+      &:hover { background: #ebebeb; }
+    }
+  }
+
+  #registration button[type="button"] {
+    background: transparent;
+    border: 0;
+    margin-top: 15px;
+    font-size: 15px;
+
+    &:hover {
+      background: transparent;
+      text-decoration: underline;
+    }
+  }
+
+  #buttons-container, #password-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+  }
+
+  &.loading #user-login, &.loading #registration,
+  &.user-login #registration, &.registration #user-login { display: none; }
+}
+
+#xml-container {
+  display: inline-block;
+  margin-left: 14px;
+  margin-right: 7px;
+  cursor: pointer;
+  padding: 4px 7px 0px 7px;
+  background: white;
+  border: 1px solid lightgray;
+
+  #xml-items {
+    display: none;
+    position: fixed;
+    background: white;
+    border: 1px solid lightgray;
+    margin-top: -1px;
+    font-size: 14px;
+    margin-left: -8px;
+
+    span {
+      padding: 8px;
+      display: block;
+
+      &.current, &:hover {
+        background: lightgray;
+        color: gray;
+      }
+
+      &.current { cursor: default; }
+    }
+  }
+
+  &:hover {
+    #xml-items {
+      display: block;
+    }
+  }
+}
+
+#topbar, #toolbox, .dashboard {
+  position: absolute;
+  right: 0;
+  width: calc(100% - 210px);
+
+  &.hidden { width: calc(100% - 60px); }
+}
+
+#topbar, #toolbox { z-index: 9; }
+#topbar { top: 0px; }
+#toolbox { top: 23px; }
+
+#header {
+  position: absolute;
+  height: auto;
+  width: auto;
+  padding: 0;
+  border: 0;
+  right: 10px;
+  z-index: 99;
+  top: 26px;
+}
+
+#login {
+  margin: 0;
+  border-radius: 0;
+}
+
+#blocklyDiv {
+  height: 100% !important;
+}
+
+#blocklyDiv .blocklyToolboxDiv:first-child {
+  height: 100% !important;
+  width: 210px !important;
+
+  & > img {
+    margin-top: 10px;
+    max-width: 190px;
+  }
+}
+
+#blocklyDiv .blocklyToolboxDiv:first-child div {
+  padding: 13px 20px;
+  font-size: 14px;
+
+  &#user-data {
+    color: black;
+
+    img {
+      width: 70px;
+      border-radius: 100%;
+      margin-bottom: 10px;
+    }
+
+    div { padding: 0; }
+  }
+
+  &.side-button {
+    text-align: start;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+
+    &.active, &:hover {
+      color: gray;
+      background: lightgray;
+    }
+
+    &.active { cursor: default; }
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: normal;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &#user-logout {
+    color: #b90202;
+
+    &:hover {
+      background: #b90202;
+      color: #f3d7d7;
+    }
+  }
+
+  &#sign-in:hover, &#contact:hover {
+    background: #0d0da5;
+
+    a { color: white; }
+  }
+}
+
+.dashboard {
+  display: none;
+  z-index: 999;
+  padding: 20px;
+  height: 100vh;
+  background: white;
+  top: 0px;
+
+  &.active { display: grid; }
+
+  &#home-section {
+    padding: 0;
+    grid-template-columns: repeat(4, 1fr);
+
+    .home-section-item {
+      position: relative;
+
+      //&#home-section-item-1 {
+      //  .home-section-background-image {
+      //    background-image:
+      //      linear-gradient(180deg, transparent, transparent, black),
+      //      url(../image/extension/banner1-hover.png);
+      //  }
+      //}
+
+      //&#home-section-item-2 {
+      //  .home-section-background-image {
+      //    background-image:
+      //      linear-gradient(180deg, transparent, transparent, black),
+      //      url(../image/extension/banner2-hover.png);
+      //  }
+      //}
+
+      //&#home-section-item-3 {
+      //  .home-section-background-image {
+      //    background-image:
+      //      linear-gradient(180deg, transparent, transparent, black),
+      //      url(../image/extension/banner3-hover.png);
+      //  }
+      //}
+
+      //&#home-section-item-4 {
+      //  .home-section-background-image {
+      //    background-image:
+      //      linear-gradient(180deg, transparent, transparent, black),
+      //      url(../image/extension/banner4-hover.png);
+      //  }
+      //}
+
+      .home-section-background-image {
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        transition: 0s;
+        filter: grayscale(100%) sepia(15%) hue-rotate(95deg);
+        -webkit-filter: grayscale(100%) sepia(15%) hue-rotate(95deg);
+      }
+
+      &:hover {
+        transition: 0s;
+
+        .home-section-background-image {
+          filter: none;
+          -webkit-filter: none;
+        }
+      }
+
+      .home-section-content {
+        display: grid;
+        align-content: end;
+        padding: 18px 20px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+
+        h1, h2 {
+          margin: 0;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+
+        h1 {
+          font-size: 25px;
+          font-weight: bold;
+          color: #cb9739;
+        }
+
+        h2 {
+          font-size: 15px;
+          color: white;
+        }
+
+        button {
+          margin: 15px 77px 10px 77px;
+          background: black;
+          border: 1px solid #cf8d14;
+          font-size: 12px;
+
+          &:hover {
+            background: #8b631a;
+            border: 1px solid #624817;
+          }
+        }
+      }
+    }
+  }
+  
+  &#sheet-section {
+    grid-template-rows: min-content auto;
+    grid-gap: 30px;
+
+    #sheet-results { overflow-y: auto; }
+    & > div { border: 1px solid #babaf5; }
+
+    h1 {
+      text-align: center;
+      color: black;
+      font-size: 21px;
+      margin: 0;
+      background: #d5d5ff;
+      padding: 10px 0;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+    }
+
+    th { white-space: nowrap; }
+
+    td {
+      text-align: center;
+      border-bottom: 0;
+
+      input {
+        border: 0;
+        border-radius: 0;
+        border-bottom: 1px solid lightgray;
+        margin-top: 5px;
+        text-align: center;
+
+        &[type=checkbox] {
+          position: static;
+          opacity: 1;
+          border: 1px solid lightgray;
+          padding: 5px;
+        }
+      }
+    }
+  }
+  
+  &#tutorials-section {
+    padding: 0;
+
+    #course-select {
+      display: none;
+      position: absolute;
+    }
+
+    #tutorial-display {
+      display: grid;
+      grid-template-columns: 57% auto;
+      height: calc(100vh - 55px);
+
+      #tutorials-nav {
+        overflow-y: auto;
+        padding: 20px;
+
+        .course {
+          .module {
+            margin-bottom: 20px;
+            border: 1px solid #b97b0b;
+            border-radius: 5px;
+
+            & > div { padding: 10px; }
+            
+            .module-header { 
+              background: #b97b0b;
+              color: white;
+              font-size: 20px;
+              border-radius: 3px;
+              border-bottom-right-radius: 0;
+              border-bottom-left-radius: 0;
+            }
+
+            .iframe-action {
+              color: #1b1bad;
+              cursor: pointer;
+
+              .iframe-container { display: none; }
+              &:hover, &.active-class { font-weight: bold; }
+              &.active-class { color: #cb0909; }
+            }
+          }
+
+          &.hidden-course { display: none; }
+        }
+      }
+    }
+  }
+}
+
+
+#tutorials-container {
+  display: grid;
+  grid-template-rows: min-content auto;
+  height: 100%;
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid gray;
+    background: lightgray;
+
+    div {
+      cursor: pointer;
+      padding: 10px;
+      &:hover, &.active-tutorial { background: gray; }
+    }
+  }
+
+  main {
+    overflow-y: scroll;
+    height: 100%;
+
+    section {
+      display: none;
+
+      &.active-tutorial { display: block; }
+
+      .iframe-container {
+        width: 100%;
+        margin-bottom: 12px;
+        height: calc(100vh - 80px);
+
+        &:last-child { margin-bottom: 0; }
+
+        iframe {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+#main-logout { height: 0; }
+
+#main-account {
+  border: 0;
+  background-color: transparent;
+}
+
+.account { font-size: 12px !important; }
+
+.main-account div {
+  display: inline;
+  color: black;
+}
+
+.main-nav .nav-caret {
+  top: -25px;
+  right: -95px;
+  color: black;
+}
+
+@media only screen and (max-width: 340px) {
+  #authorization-container {
+    #user-login, #registration {
+      width: 95%;
+      margin: auto;
+    }
+  }
+}
+
+@import 'extension_oznerbots';
