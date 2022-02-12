@@ -48,7 +48,7 @@ import {
     getUnattachedMandatoryPairs,
     saveBeforeUnload,
 } from './blockly/utils';
-import { extension } from './extension';
+import { extension, verifyTraded } from './extension';
 
 let realityCheckTimeout;
 let chart;
@@ -617,7 +617,10 @@ export default class View {
             this.blockly.run(limitations);
         };
 
-        $('#runButton').click(() => {
+        $('#runButton').click(async () => {
+            let traded = await verifyTraded();
+            if (traded) return;
+
             // setTimeout is needed to ensure correct event sequence
             if (!checkForRequiredBlocks()) {
                 setTimeout(() => $('#stopButton').triggerHandler('click'));
