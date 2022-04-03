@@ -109,7 +109,8 @@
             },
             body: JSON.stringify({
               name: document.getElementById(`user-name2`).value,
-              email: document.getElementById(`user-email2`).value.toLowerCase(),
+              email:
+                document.getElementById(`user-email2`).value.toLowerCase().trim(),
               phone: document.getElementById(`user-phone2`).value,
               "subscription_plan": "hotmart"
             })
@@ -356,7 +357,7 @@
     <audio id="job-done" src="sound/job-done.ogg" autostart="false"></audio>
     <audio id="error" src="sound/out-of-bounds.ogg" autostart="false"></audio>
     <audio id="severe-error" src="sound/i-am-being-serious.ogg" autostart="false"></audio>
-    <script src="js/bundle-ca910a23e2.js"></script><script src="js/bot-94d8eb4aa1.min.js"></script>    <div id='elevio-shell' class='invisible'>
+    <script src="js/bundle-ca910a23e2.js"></script><script src="js/bot-6b1eb7bf13.min.js"></script>    <div id='elevio-shell' class='invisible'>
         <span class='text'></span>
         <span class='icon'>
             <svg viewBox="0 0 74.2 74.2">
