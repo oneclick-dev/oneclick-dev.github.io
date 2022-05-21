@@ -58,7 +58,7 @@ export const oauthLogin = (done = () => 0) => {
 
 export const getCustomEndpoint = () => ({
     url  : getStorage('config.server_url'),
-    appId: getStorage('config.app_id'),
+    appId: userAppId
 });
 
 const isRealAccount = () => {
@@ -105,7 +105,7 @@ export const getOAuthURL = () =>
 const options = {
     apiUrl  : getWebSocketURL(),
     language: getLanguage().toUpperCase(),
-    appId   : getAppIdFallback(),
+    appId   : userAppId
 };
 
 export const generateLiveApiInstance = () => new LiveApi(options);
