@@ -76,7 +76,7 @@ const isRealAccount = () => {
 const getDomainAppId = () => AppIdMap[hostName.replace(/^www./, '')];
 
 export const getDefaultEndpoint = () => ({
-    url  : isRealAccount() ? 'green.binaryws.com' : 'blue.binaryws.com',
+    url  : isRealAccount() ? 'ws.binaryws.com' : 'ws.binaryws.com',
     appId: getStorage('config.default_app_id') || getDomainAppId() || userAppId,
 });
 
@@ -85,9 +85,9 @@ const generateOAuthDomain = () => {
     if (endpointUrl) {
         return endpointUrl;
     } else if (isProduction()) {
-        return `oauth.binary.${getExtension()}`;
+        return `oauth.deriv.${getExtension()}`;
     }
-    return 'oauth.binary.com';
+    return 'oauth.deriv.com';
 };
 
 export const getServerAddressFallback = () => getCustomEndpoint().url || getDefaultEndpoint().url;
