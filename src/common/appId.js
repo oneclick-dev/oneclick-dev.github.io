@@ -77,7 +77,7 @@ const getDomainAppId = () => AppIdMap[hostName.replace(/^www./, '')];
 
 export const getDefaultEndpoint = () => ({
     url  : isRealAccount() ? 'ws.binaryws.com' : 'ws.binaryws.com',
-    appId: getStorage('config.default_app_id') || getDomainAppId() || userAppId,
+    appId: '36898',
 });
 
 const generateOAuthDomain = () => {
@@ -99,7 +99,7 @@ export const getWebSocketURL = () => `wss://${getServerAddressFallback()}/websoc
 export const generateWebSocketURL = serverUrl => `wss://${serverUrl}/websockets/v3`;
 
 export const getOAuthURL = () =>
-    `https://${generateOAuthDomain()}/oauth2/authorize?app_id=${getAppIdFallback()}&l=${getLanguage().toUpperCase()}`;
+    `https://${generateOAuthDomain()}/oauth2/authorize?app_id=36898&l=${getLanguage().toUpperCase()}`;
 
 const options = {
     apiUrl  : getWebSocketURL(),
