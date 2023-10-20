@@ -76,7 +76,7 @@ const isRealAccount = () => {
 const getDomainAppId = () => AppIdMap[hostName.replace(/^www./, '')];
 
 export const getDefaultEndpoint = () => ({
-    url  : isRealAccount() ? 'ws.binaryws.com' : 'ws.binaryws.com',
+    url  : isRealAccount() ? 'ws.derivws.com' : 'ws.derivws.com',
     appId: userAppId,
 });
 
