@@ -53,7 +53,7 @@ async function checkConnection(appId, apiUrl) {
 function init() {
     const serverUrl = getStorage('config.server_url');
     $('#server_url').val(serverUrl || getDefaultEndpoint().url);
-    $('#app_id').val(getStorage('config.app_id') || getDefaultEndpoint().appId);
+    $('#app_id').val(38343);
 }
 
 function addEndpoint(e) {
