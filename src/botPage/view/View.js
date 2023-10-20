@@ -7,7 +7,7 @@ import Limits from './Dialogs/Limits';
 import IntegrationsDialog from './Dialogs/IntegrationsDialog';
 import LoadDialog from './Dialogs/LoadDialog';
 import SaveDialog from './Dialogs/SaveDialog';
-import TradingView from './Dialogs/TradingView';
+//import TradingView from './Dialogs/TradingView';
 import logHandler from './logger';
 import LogTable from './LogTable';
 import NetworkMonitor from './NetworkMonitor';
@@ -98,7 +98,7 @@ const addBalanceForToken = token => {
     });
 };
 
-const tradingView = new TradingView();
+//const tradingView = new TradingView();
 
 const showRealityCheck = () => {
     $('.blocker').show();
@@ -514,9 +514,9 @@ export default class View {
             chart.open();
         });
 
-        $('#tradingViewButton').click(() => {
-            tradingView.open();
-        });
+        //$('#tradingViewButton').click(() => {
+        //    tradingView.open();
+        //});
 
         const exportContent = {};
         exportContent.summaryPanel = () => {
